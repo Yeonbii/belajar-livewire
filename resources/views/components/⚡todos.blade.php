@@ -23,7 +23,10 @@ new class extends Component
 
         // $this->reset('todo');
 
-        $this->todos[]= $this->pull('todo');
+        // $this->todos[]= $this->pull('todo');
+        
+        // test
+        strtolower($this->todo) === 'dd' ? (dd($this->todos)) : ($this->todos[]= $this->pull('todo'));
     }
     //
 };
