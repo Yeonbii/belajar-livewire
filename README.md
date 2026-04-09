@@ -22,5 +22,9 @@ composer run dev
 ```
 
 ## Coretan
-> Pada dasarnya hanyalah semacam 'coretan' setiap aku belajar dan itu mungkin aku anggap penting 
-Tapi entar dulu deh ngisinya 😂
+> Pada dasarnya hanyalah semacam 'coretan' setiap aku belajar dan itu mungkin aku anggap penting.
+
+### Wireables
+Cara sederhana untuk ngajarin Livewire: "Kalau ketemu object ini, ubah jadi data begini."
+- 'toLivewire()' -> menyimpan state component ke JSON.
+- 'fromLivewire()' -> mengembalikan JSON menjadi object php lagi.
