@@ -12,13 +12,17 @@ new class extends Component
     //     $this->postId = $id;
     // }
 
-    public Post $post; // Automatically bound from route
- 
-    // No mount() needed - Livewire handles it automatically
+    public Post $post;
+
+    // dd($this->post) tidak bisa langsung di dalam class, mesti dilakukan dalam method
+    // saran menggunakan method mount()
+    // public function mount()
+    // {
+    //     dd($this->post);
+    // }
 };
 ?>
 
 <div>
-    <h1>{{ $post->title }}</h1>
-    <p>{{ $post->content }}</p>
+    <livewire:post.show :title="$post->title" :content="$post->content" />
 </div>

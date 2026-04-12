@@ -6,7 +6,7 @@ new class extends Component
 {
     public $title;
  
-    // selama nama prop-nya sama, maka bisa tidak menggunakan mount
+    // selama nama prop-nya sama, maka bisa tidak menggunakan mount()
     // public function mount($title = null)
     // {
     //     $this->title = $title;

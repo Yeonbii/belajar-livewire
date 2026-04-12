@@ -41,5 +41,6 @@ new class extends Component {
     <hr>
 
     {{-- <livewire:post.create title="Initial Title" /> --}}
+    {{-- untuk nilai dinamis atau variable --}}
     <livewire:post.create :title="$initialTitle" />
 </div>

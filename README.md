@@ -26,5 +26,53 @@ composer run dev
 
 ### Wireables
 Cara sederhana untuk ngajarin Livewire: "Kalau ketemu object ini, ubah jadi data begini."
-- 'toLivewire()' -> menyimpan state component ke JSON.
-- 'fromLivewire()' -> mengembalikan JSON menjadi object php lagi.
+- `toLivewire()` -> menyimpan state component ke JSON.
+- `fromLivewire()` -> mengembalikan JSON menjadi object php lagi.
+
+### Rendering Components
+Sintaks untuk merender komponen
+- `<livewire:component-name />` -> resources/views/components/⚡component-name.blade.php
+- `<livewire:sub-directory.component-name />` -> resources/views/components/sub-directory/⚡component-name.blade.php
+- `<livewire:pages::component-name />` -> resources/views/pages/⚡component-name.blade.php
+
+Dengan mengirim props (data)
+- `<livewire:component-name nama-prop="Nilai Properti" />`
+- `<livewire:component-name :nama-prop="$namaProperti" />` -> Jika prop yang dikirim berupa suatu variabel atau nilai yang dinamis
+
+### Menerima Props (Data)
+Data yang dikirim ke komponen diterima dengan menggunakan method `mount()`.
+```sh
+public $namaProperti;
+ 
+public function mount($nameProperti = null)
+{
+    $this->namaProperti = $namaProperti;
+}
+```
+
+Jika nama variable yang digunakan sama dengan nama properti yang dikirim, maka bisa tidak menggunakan method `mount()`.
+```sh
+public $namaProperti;
+```
+
+### Mengirim Parameter Route Sebagai Props
+```sh
+Route::livewire('/posts/{id}', 'pages::post.show');
+```
+Diterima dnegan method `mount()`.
+```sh
+public $postId;
+ 
+public function mount($id)
+{
+    $this->postId = $id;
+}
+```
+
+Begitu juga dengan _Laravel's route model binding_.
+```sh
+Route::livewire('/posts/{post}', 'pages::post.show');
+```
+```sh
+public Post $post;
+```

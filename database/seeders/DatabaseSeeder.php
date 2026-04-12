@@ -17,26 +17,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create();
+        Post::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        $posts = [
-            [
-                'title' => 'First Post',
-                'content' => 'This is the content of the first post.',
-            ],
-            [
-                'title' => 'Second Post',
-                'content' => 'This is the content of the second post.',
-            ],
-        ];
+        // $posts = [
+        //     [
+        //         'title' => 'First Post',
+        //         'content' => 'This is the content of the first post.',
+        //     ],
+        //     [
+        //         'title' => 'Second Post',
+        //         'content' => 'This is the content of the second post.',
+        //     ],
+        // ];
 
-        foreach ($posts as $post) {
-            Post::create($post);
-        }
+        // foreach ($posts as $post) {
+        //     Post::create($post);
+        // }
 
     }
 }
