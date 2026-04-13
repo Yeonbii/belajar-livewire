@@ -11,25 +11,27 @@ new class extends Component
     // {
     //     $this->title = $title;
     // }
-    
+
     public $title = '';
     public $content = '';
     public $user_id;
- 
+
     public function save()
     {
         $this->validate([
             'title' => 'required|max:255',
             'content' => 'required',
         ]);
-        
+
         $this->user_id = User::query()->inRandomOrder()->value('id');
- 
-        // dd($this->title, $this->content, $this->user_id);
+
         Post::create([
             'title' => $this->pull('title'),
             'content' => $this->pull('content'),
-            'user_id' => $this->pull('user_id')
+            'user_id' => $this->pull('user_id'),
         ]);
+
+        // 🔥 kirim event
+        $this->dispatch('post-created');
     }
 };

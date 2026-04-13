@@ -1,34 +1,41 @@
 <?php
 
-use Livewire\Component;
 use App\Models\Post;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-new class extends Component
-{
-    public $users;
-    
-    public $title = "Posts Page";
-    
+new class extends Component {
+    // #[Computed]
+    // public function posts()
+    // {
+    //     return Post::with('user')->latest()->get();
+    // }
+
+    // #[On('post-created')]
+    // public function refresh()
+    // {
+    //     // kosong pun gak masalah
+    //     // ini hanya untuk trigger re-render
+    // }
+
+    public $posts;
+
     public function mount()
     {
-      $this->posts = Post::with('user')->latest()->get();
-      
-      // dd($this->posts);
+        $this->posts = Post::with('user')->latest()->get();
     }
-    
-    public function render()
+
+    #[On('post-created')]
+    public function updatePostList()
     {
-      $this->posts = Post::with('user')->latest()->get();
+        $this->posts = Post::with('user')->latest()->get();
     }
 };
 ?>
 
 <div>
-  <ul>
-    @foreach ($this->posts as $post)
-      <li>
-        {{ $post->id }}
-      </li>
+    @foreach ($posts as $post)
+        <article wire:key="post-{{ $post->id }}">{{ $post->id }} - {{ $post->title }}</article>
     @endforeach
-  </ul>
 </div>

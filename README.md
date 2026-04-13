@@ -59,7 +59,7 @@ public $namaProperti;
 ```sh
 Route::livewire('/posts/{id}', 'pages::post.show');
 ```
-Diterima dnegan method `mount()`.
+Diterima dengan method `mount()`.
 ```sh
 public $postId;
  
@@ -76,3 +76,6 @@ Route::livewire('/posts/{post}', 'pages::post.show');
 ```sh
 public Post $post;
 ```
+
+### SPAAA
+Atau semacamnya wkkk. Jadi kali ini aku berhasil mempelajari cara agar suatu halaman bisa melakukan _Create Data_ dan _Show List Data_ pada satu halaman tanpa reload. Untuk melakukannya diperlukan `dispatch('nama-event')` pada komponen yang melakukan _action_ dan `#[On('nama-event')]` pada komponen yang membutuhkan _render_ ulang. Untuk detail silahkan cek file `web.php` untuk route `/posts`.
