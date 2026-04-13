@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,12 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'content' => fake()->paragraphs(3, true)
+            'content' => fake()->paragraph(),
+
+            // slug tidak perlu diisi
+            // akan dihandle oleh model
+
+            'user_id' => User::query()->inRandomOrder()->value('id'),
         ];
     }
 }

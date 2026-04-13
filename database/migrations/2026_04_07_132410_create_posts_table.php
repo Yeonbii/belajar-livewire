@@ -14,8 +14,16 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('content');
             $table->timestamps();
+
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained() // gunakan constrained('table') jika foreignId tidak menggunakan format table_id
+                ->nullOnDelete(); // kalau user dihapus -> set jadi null
+            //  ->cascadeOnDelete() // kalau user dihapus -> post ikut kehapus
+            //  ->restrictOnDelete() //  tidak bisa hapus user kalau masih dipakai 
         });
     }
 
