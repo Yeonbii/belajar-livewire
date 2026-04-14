@@ -10,7 +10,7 @@ new class extends Component {
 };
 ?>
 
-<div class="w-full max-w-lg m-auto my-10 px-5">
+<div class="w-full max-w-lg m-auto p-5">
     <livewire:post.create />
     <livewire:post.list />
 </div>

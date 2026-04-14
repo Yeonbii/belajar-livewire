@@ -1,7 +1,8 @@
-<div class="w-full max-w-lg m-auto my-10 px-5">
+<div class="w-full max-w-lg m-auto mt-5 mb-10">
     <h1 class="text-3xl font-semibold mb-5">Buat Post</h1>
     
-    <form wire:submit="save" class="border rounded-lg p-6 flex flex-col gap-4">
+    <form wire:submit="save" class="border rounded-lg p-4 flex flex-col gap-4">
+      @csrf
         <div class="flex flex-col gap-1">
             <label for="title" class="font-medium text-gray-700">Judul</label>
             <input type="text" id="title" wire:model="title" class="border rounded px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500">

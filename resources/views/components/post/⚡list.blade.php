@@ -4,38 +4,44 @@ use App\Models\Post;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 new class extends Component {
-    // #[Computed]
-    // public function posts()
-    // {
-    //     return Post::with('user')->latest()->get();
-    // }
-
-    // #[On('post-created')]
-    // public function refresh()
-    // {
-    //     // kosong pun gak masalah
-    //     // ini hanya untuk trigger re-render
-    // }
-
-    public $posts;
-
-    public function mount()
+    use WithPagination;
+    #[Computed]
+    public function posts()
     {
-        $this->posts = Post::with('user')->latest()->get();
+      return Post::with('user')->latest()->paginate(5);
     }
 
     #[On('post-created')]
-    public function updatePostList()
+    #[On('post-deleted')]
+    public function refresh()
     {
-        $this->posts = Post::with('user')->latest()->get();
+      
+      $this->previousPage();
     }
+
+    // public $posts;
+
+    // public function mount()
+    // {
+    //     $this->posts = Post::with('user')->latest()->latest();
+    // }
+
+    // #[On('post-created')]
+    // #[On('post-deleted')]
+    // public function updatePostList()
+    // {
+    //     $this->posts = Post::with('user')->latest()->latest();
+    // }
 };
 ?>
 
-<div>
-    @foreach ($posts as $post)
-        <article wire:key="post-{{ $post->id }}">{{ $post->id }} - {{ $post->title }}</article>
+<div id="paginated-post">
+    @foreach ($this->posts as $post)
+        <livewire:post.item :post="$post" wire:key="post-{{ $post->id }}" />
     @endforeach
+    
+    {{ $this->posts->links(data:['scroolTo' => '#paginated-post']) }}
 </div>
