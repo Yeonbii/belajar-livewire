@@ -5,22 +5,37 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithoutUrlPagination;
 
 new class extends Component {
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
+
     #[Computed]
     public function posts()
     {
-      return Post::with('user')->latest()->paginate(5);
+        return Post::with('user')->latest()->paginate(5);
     }
 
     #[On('post-created')]
-    #[On('post-deleted')]
-    public function refresh()
+    public function goToFirstPage()
     {
-      
-      $this->previousPage();
+        $this->resetPage();
     }
+
+    #[On('post-deleted')]
+    public function stayOrBack()
+    {
+        if ($this->getPage() > 1 && $this->posts->isEmpty()) {
+            $this->previousPage();
+        }
+    }
+
+    // #[On('post-created')]
+    // #[On('post-deleted')]
+    // public function refresh()
+    // {
+    //   // $this->previousPage();
+    // }
 
     // public $posts;
 
@@ -38,10 +53,11 @@ new class extends Component {
 };
 ?>
 
-<div id="paginated-post">
+<div id="paginated-post" class="pt-5 -mt-5">
+  <h3 class="text-2xl font-semibold mb-5">Post</h3>
     @foreach ($this->posts as $post)
         <livewire:post.item :post="$post" wire:key="post-{{ $post->id }}" />
     @endforeach
-    
-    {{ $this->posts->links(data:['scroolTo' => '#paginated-post']) }}
+
+    {{ $this->posts->links(data: ['scrollTo' => '#paginated-post']) }}
 </div>
