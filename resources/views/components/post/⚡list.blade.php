@@ -25,9 +25,13 @@ new class extends Component {
     #[On('post-deleted')]
     public function stayOrBack()
     {
-        if ($this->getPage() > 1 && $this->posts->isEmpty()) {
-            $this->previousPage();
-        }
+      // Memanggil property Computed
+      // Jika di dalam class gunakan $this->posts()
+      // Jika di dalam view gunakan $this->posts
+      if ($this->posts()->isEmpty() && $this->getPage() > 1)
+      {
+        $this->previousPage();
+      }
     }
 
     // #[On('post-created')]

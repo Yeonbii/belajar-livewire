@@ -8,7 +8,7 @@ new class extends Component
     
     public function destroy()
     {
-     $this->post->delete();
+      $this->post->delete();
       // 🔥 kirim event
       $this->dispatch('post-deleted');
     }
